@@ -1,2 +1,79 @@
-<h1>Admin::Items#new</h1>
-<p>Find me in app/views/admin/items/new.html.erb</p>
+<div class="body">
+	<div class="container">
+		<% if @item.errors.any? %>
+	        <div id="error_explanation">
+	        <h2><%= @item.errors.count %> errors prohibited this obj from being saved:</h2>
+	        <ul><% @item.errors.full_messages.each do |message| %>
+	            <li><%= message %></li>
+	         	<% end %>
+	        </ul>
+	       	</div>
+	    <% end %>
+		<p id="notice"><%= notice %></p>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-2">
+				<h2>商品新規登録</h2>
+			</div>
+			<%= form_for(@item, url: admin_items_path) do |f| %>
+				<section class='item_image_box'>
+					<div class="col-sm-5">
+						<%= attachment_image_tag @item, :image, :fill, 100, 100, format: 'jpeg' %>
+						<%= f.attachment_field :image %>
+					</div>
+				</section>
+				<div class="col-sm-6">
+
+				<div class="form-horizontal">
+		                <div class="form-group">
+			                <label for="name" class="col-sm-4 control-label" >商品名</label>
+			                <div class="col-sm-7">
+			                	<%= f.text_field :name, class:"form-control" %>
+			                </div>
+		            	</div>
+		            	<div class="form-group">
+			                <label for="introduction", class="col-sm-4 control-label" >商品説明</label>
+			                <div class="col-sm-7">
+			                	<%= f.text_area :introduction, class:"form-control" %>
+			                </div>
+		            	</div>
+		            	<div class="form-group">
+			                <label for="genre_id" class="col-sm-4 control-label" >ジャンル</label>
+			                <div class="col-sm-7">
+				                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				                	-- 選択してください --<span class="caret"></span>
+				                </button>
+				                <ul class="dropdown-menu" role="menu">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">リンクのリスト１</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">リンクのリスト２</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">リンクのリスト３</a></li>
+								</ul>
+							</div>
+		            	</div>
+		            	<div class="form-group">
+			                <label for="price" class="col-sm-4 control-label" >税抜価格</label>
+			                <div class="col-sm-7">
+			                	<%= f.text_field :price, class:"form-control" %>
+			                </div>
+			                <div class="col-sm-1"><span>円</span></div>
+		            	</div>
+		            	<div class="form-group">
+			                <label for="is_active" class="col-sm-4 control-label">販売ステータス</label>
+			                <div class="col-sm-7">
+				                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				                	-- 選択してください --<span class="caret"></span>
+				                </button>
+				                <ul class="dropdown-menu" role="menu">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">リンクのリスト１</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">リンクのリスト２</a></li>
+								</ul>
+							</div>
+		            	</div>
+		            	<div class="actions row">
+		            		<%= f.submit "新規登録", class:"btn btn-primary col-xs-3 col-xs-offset-9" %>
+		            	</div>
+		            <% end %>
+	        	</div>
+	        </div>
+	    </div>
+	</div>
+</div>

@@ -1,0 +1,37 @@
+<section class="slice slice-lg sct-color-1">
+  <div class="container">
+    <div class="row">
+                    <%= render "admins/shared/error_messages", resource: resource %>
+
+      <div class="form-user style-1 rounded has-shadow-1">
+        <div class="form-header text-left">
+          <h2 class="form-header-title">管理者ログイン</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2">
+            <div class="form-horizontal">
+
+              <%= form_for(resource, as: resource_name, url: admin_session_path) do |f| %>
+                <div class="form-group">
+                  <label class="col-sm-4 control-label" for="email">メールアドレス</label><div class="col-sm-8">
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-4 control-label" for="password">パスワード</label><div class="col-sm-8">
+                  <%= f.password_field :password, autocomplete: "off", class: "form-control" %></div>
+                </div>
+
+                <div class="form-group">
+                  <%= f.submit "ログイン", class: "btn btn-primary col-sm-offset-4 col-sm-8" %>
+                </div>
+              <% end %>
+            </div>
+      </div>
+    </div>
+  </div>
+
+</section>

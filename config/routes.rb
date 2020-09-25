@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
+	root 'items#top'
+	get '/admin' => 'admin/homes#top', as: 'admin_top'
 
 	scope module: :public do
 		devise_for :customers, controllers: {
 			registrations: 'public/registrations',
 			sessions: 'public/sessions'
 		}
-		root 'items#top'
 		resources :addresses, only: [:index, :edit]
 		resources :items, only: [:index, :show]
 			get 'items/top' => 'items#top'
@@ -24,14 +25,17 @@ Rails.application.routes.draw do
 			get 'orders/thanks' => 'orders#thanks', as: 'thanks'
 	end
 
+	devise_for :admin, skip: :all
+	devise_scope :admin do
+		get 'admin/sign_in' => 'admin/sessions#new', as: :new_admin_session
+		post 'admin/sign_in' => 'admin/sessions#create', as: :admin_session
+		delete 'admin/sign_out' => 'admin/sessions#destroy', as: :destroy_admin_session
+	end
+
 	namespace :admin do
-		devise_for :admin, controllers: {
-			sessions: 'admin/sessions'
-		}
 		resources :customers, only: [:index, :show, :edit, :update]
 		resources :genres, only: [:index, :create, :edit, :update]
 		resources :items, except: [:destroy]
-		get '/' => 'homes#top', as: 'admin_top'
 		resources :orders, only: [:index, :show, :update]
 		resources :order_details, only: [:update]
 	end
