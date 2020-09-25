@@ -1,20 +1,12 @@
 <div class="body">
 	<div class="container">
-		<% if @item.errors.any? %>
-	        <div id="error_explanation">
-	        <h2><%= @item.errors.count %> errors prohibited this obj from being saved:</h2>
-	        <ul><% @item.errors.full_messages.each do |message| %>
-	            <li><%= message %></li>
-	         	<% end %>
-	        </ul>
-	       	</div>
-	    <% end %>
+		<%= render 'layouts/error_messages', hoge: @item %>
 		<p id="notice"><%= notice %></p>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-2">
 				<h2>商品新規登録</h2>
 			</div>
-			<%= form_for(@item, url: admin_items_path) do |f| %>
+			<%= form_for @item, url: admin_items_path do |f| %>
 				<section class='item_image_box'>
 					<div class="col-sm-5">
 						<%= attachment_image_tag @item, :image, :fill, 100, 100, format: 'jpeg' %>
@@ -51,10 +43,10 @@
 		            	</div>
 		            	<div class="form-group">
 			                <label for="price" class="col-sm-4 control-label" >税抜価格</label>
-			                <div class="col-sm-7">
+			                <div class="input-group col-sm-7">
 			                	<%= f.text_field :price, class:"form-control" %>
+			                	<span class="input-group-addon">円</span>
 			                </div>
-			                <div class="col-sm-1"><span>円</span></div>
 		            	</div>
 		            	<div class="form-group">
 			                <label for="is_active" class="col-sm-4 control-label">販売ステータス</label>

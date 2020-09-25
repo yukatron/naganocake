@@ -1,0 +1,9 @@
+<% if hoge.errors.any? %>
+	<div id="error_explanation">
+	    <h2><%= hoge.errors.count %> 件のエラーが発生、保存できませんでした！</h2>
+	    <ul><% hoge.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	        <% end %>
+	    </ul>
+	</div>
+<% end %>
