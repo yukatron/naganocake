@@ -1,4 +1,7 @@
 ja:
+  helpers:
+    select:
+      prompt: "--選択してください--"
   activerecord:
     models:
       genre: ジャンル
