@@ -23,13 +23,13 @@
 							<% @items.each do |item| %>
 							 	<tr>
 							 		<td><%= item.id %></td>
-							 		<td><%= item.name %></td>
+							 		<td><%= link_to item.name, admin_item_path(item.id) %></td>
 							 		<td><%= item.price %></td>
 							 		<td><%= item.genre.name %></td>
 							 		<td><% if item.is_active == true %>
-							 			<p>有効</p>
+							 			<p>販売中</p>
 							 			<% else %>
-							 			<p>無効</p>
+							 			<p>販売停止中</p>
 							 			<% end %>
 							 		</td>
 							 	</tr>
