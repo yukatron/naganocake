@@ -3,7 +3,7 @@
 		<%= render 'layouts/error_messages', hoge: @item %>
 		<p id="notice"><%= notice %></p>
 		<div class="row">
-			<div class="col-md-6 col-md-offset-2">
+			<div class="page-header">
 				<h2>商品新規登録</h2>
 			</div>
 			<%= form_for(@item, url: admin_items_path) do |f| %>
