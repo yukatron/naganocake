@@ -1,0 +1,26 @@
+<section class="slice slice-lg sct-color-1">
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-xs-12 col-sm-4 col-md-3">
+      			<div class="panel panel-default">
+      				<div class="panel-heading">
+      				ジャンル一覧
+      				</div>
+      				<div class="list-group">
+      					<% @genres.each do |genre| %>
+      						<div class="list-group-item">
+      						<%= genre.name %>
+      						</div>
+      					<% end %>
+      				</div>
+    			</div>
+    		</div>
+
+    		<div class="col-xs-12 col-sm-8 col-md-9">
+    			<div class="page-header text-left">
+    				<h1>商品一覧</h1>
+    			</div>
+    		</div>
+    	</div>
+	</div>
+</section>

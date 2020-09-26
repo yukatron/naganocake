@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	root 'items#top'
+	root 'public/items#top'
 	get '/admin' => 'admin/homes#top', as: 'admin_top'
 
 	scope module: :public do
@@ -9,9 +9,9 @@ Rails.application.routes.draw do
 			sessions: 'public/sessions'
 		}
 		resources :addresses, only: [:index, :edit]
+		get 'items/about' => 'items#about', as: 'about'
 		resources :items, only: [:index, :show]
 			get 'items/top' => 'items#top'
-			get 'items/about' => 'items#about', as: 'about'
 		resources :customers, only: [:show, :edit, :update]
 			get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
 			patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
