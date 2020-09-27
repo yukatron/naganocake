@@ -6,7 +6,7 @@
 			<div class="page-header">
 				<h2>商品新規登録</h2>
 			</div>
-			<%= form_for(@item, url: admin_items_path) do |f| %>
+			<%= form_with model: @item, url: admin_items_path, local: true do |f| %>
 				<section class='item_image_box'>
 					<div class="col-sm-5">
 						<%= attachment_image_tag @item, :image, :fill, 100, 100, format: 'jpeg' %>

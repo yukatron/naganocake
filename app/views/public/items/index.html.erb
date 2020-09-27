@@ -13,7 +13,7 @@
           				<div class="list-group">
           					<% @genres.each do |genre| %>
           						<div class="list-group-item">
-          						<%= genre.name %>
+          						<%= link_to genre.name, items_path(genre_id: genre.id) %>
           						</div>
           					<% end %>
           				</div>
@@ -26,7 +26,11 @@
           <div class="mansory-wrapper-cols">
             <div class="masonry-gutter"></div>
       		    <div class="page-header text-left">
-      				  <h1>商品一覧</h1>
+                <% if @genre.present? %>
+      				    <h1><%= @genre.name %>一覧</h1>
+                <% else %>
+                  <h1>商品一覧</h1>
+                <% end %>
       		    </div>
 
               <div class="page-body">
