@@ -1,0 +1,21 @@
+<section class="slice slice-lg sct-color-1">
+  	<div class="container">
+  		<div class="gutter"></div>
+
+        	<%= render 'genre_search.html.erb', genres: @genres %>
+
+    		<div class="page-body col-xs-6 col-sm-9 col-md-10">
+            	<div class="row">
+	            	<div class="col-xs-5 col-xs-offset-1 text-center">
+						<%= attachment_image_tag @item, :image, format: 'jpeg', fallback:"no_image.jpg", size: '127x89' %>
+					</div>
+					<div class="col-xs-6">
+						<p class="lead"><strong><%= @item.name %></strong></p>
+						<p><%= @item.introduction %></p>
+					</div>
+				</div>
+				<div class="row">
+				</div>
+        	</div>
+    </div>
+</section>

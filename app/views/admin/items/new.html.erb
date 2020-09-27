@@ -1,0 +1,62 @@
+<div class="body">
+	<div class="container">
+		<%= render 'layouts/error_messages', hoge: @item %>
+		<p id="notice"><%= notice %></p>
+		<div class="row">
+			<div class="page-header">
+				<h2>商品新規登録</h2>
+			</div>
+			<%= form_with model: @item, url: admin_items_path, local: true do |f| %>
+				<div class='item_image_box'>
+					<div class="col-xs-4 text-center">
+						<%= attachment_image_tag @item, :image, format: 'jpeg', fallback:"no_image.jpg", size: '127x89' %>
+						<%= f.attachment_field :image %>
+					</div>
+				</div>
+				<div class="col-xs-8">
+				<div class="form-horizontal">
+		                <div class="form-group" style="height:3em;">
+			                <label for="name" class="col-xs-4 control-label" >商品名</label>
+			                <div class="col-xs-7">
+			                	<%= f.text_field :name, class:"form-control" %>
+			                </div>
+		            	</div>
+		            	<div class="form-group" style="height:3em;">
+			                <label for="introduction", class="col-xs-4 control-label" >商品説明</label>
+			                <div class="col-xs-7">
+			                	<%= f.text_area :introduction, class:"form-control" %>
+			                </div>
+		            	</div>
+		            	<div class="form-group" style="height:3em;">
+			                <label for="genre_id" class="col-xs-4 control-label" >ジャンル</label>
+			                <div class="col-xs-7">
+			                	<%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => true %>
+							</div>
+		            	</div>
+		            	<div class="form-group" style="height:3em;">
+			                <label for="price" class="col-xs-4 control-label" >税抜価格</label>
+			                <div class="input-group col-xs-7">
+			                	<%= f.text_field :price, class: "form-control" %><span class="input-group-addon">円</span>
+			                </div>
+		            	</div>
+		            	<div class="form-group" style="height:3em;">
+			                <label for="favorite" class="col-xs-4 control-label">おすすめ設定</label>
+			                <div class="col-xs-7">
+			                	<%= f.check_box :favorite, {:checked => false}, "true", "false" %>
+							</div>
+		            	</div>
+		            	<div class="form-group" style="height:3em;">
+			                <label for="is_active" class="col-xs-4 control-label">販売ステータス</label>
+			                <div class="col-xs-7">
+			                	<%= f.select :is_active, [["有効", true], ["無効", false]], :prompt => true %>
+							</div>
+		            	</div>
+		            	<div class="actions row">
+		            		<%= f.submit "新規登録", class:"btn btn-primary col-xs-3 col-xs-offset-9" %>
+		            	</div>
+		            <% end %>
+	        	</div>
+	        </div>
+	    </div>
+	</div>
+</div>

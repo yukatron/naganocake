@@ -1,0 +1,18 @@
+ja:
+  helpers:
+    select:
+      prompt: "--選択してください--"
+  activerecord:
+    models:
+      genre: ジャンル
+      item: 商品
+    attributes:
+      genre:
+        name: ジャンル
+        is_active: 状態
+      item:
+        image: 画像
+        name: 商品名
+        introduction: 商品説明
+        price: 価格
+        is_active: 販売ステータス

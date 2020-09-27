@@ -1,0 +1,65 @@
+<div class="body">
+	<div class="container">
+		<div class="row">
+			<div class="page-header">
+				<h2>商品詳細</h2>
+			</div>
+				<section class='item_image_box'>
+					<div class="col-xs-4 text-center">
+						<%= attachment_image_tag @item, :image, format: 'jpeg', fallback:"no_image.jpg", size: '127x89' %>
+					</div>
+				</section>
+				<div class="col-xs-8">
+		                <div class="row" style="height:3em;">
+			                <label for="name" class="col-xs-4 control-label" >商品名</label>
+			                <div class="col-xs-7">
+			                	<%= @item.name %>
+			                </div>
+		            	</div>
+		            	<div class="row" style="height:5em;">
+			                <label for="introduction", class="col-xs-4 control-label" >商品説明</label>
+			                <div class="col-xs-7">
+			                	<%= @item.introduction %>
+			                </div>
+		            	</div>
+		            	<div class="row" style="height:3em;">
+			                <label for="genre_id" class="col-xs-4 control-label" >ジャンル</label>
+			                <div class="col-xs-7">
+			                	<%= @item.genre.name %>
+							</div>
+		            	</div>
+		            	<div class="row" style="height:3em;">
+			                <label for="price" class="col-xs-4 control-label" >税込価格 (税抜価格)</label>
+			                <div class="col-xs-7">
+			                	<%= @item.price %>
+			                	<span>円</span>
+			                </div>
+		            	</div>
+		            	<div class="row" style="height:3em;">
+			                <label for="favorite" class="col-xs-4 control-label">おすすめ設定</label>
+			                <div class="col-xs-7">
+			                	<% if @item.favorite == true %>
+							 			<p>有り</p>
+							 			<% else %>
+							 			<p>無し</p>
+							 			<% end %>
+							</div>
+		            	</div>
+		            	<div class="row" style="height:3em;">
+			                <label for="is_active" class="col-xs-4 control-label">販売ステータス</label>
+			                <div class="col-xs-7">
+			                	<% if @item.is_active == true %>
+							 			<p>販売中</p>
+							 			<% else %>
+							 			<p>販売停止中</p>
+							 			<% end %>
+							</div>
+		            	</div>
+		            	<div class="row" style="height:3em;">
+		            		<%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-primary col-xs-3 col-xs-offset-9" %>
+		            	</div>
+	        	</div>
+	        </div>
+	    </div>
+	</div>
+</div>
