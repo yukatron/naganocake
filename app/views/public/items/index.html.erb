@@ -1,30 +1,11 @@
 <section class="slice slice-lg sct-color-1">
-  	<div class="container-fluid mansory-container">
+  	<div class="container">
       <div class="row">
 
-  			<div class="col-xs-6 col-sm-3 col-md-2">
-          <div class="masonry-wrapper-cols">
-            <div class="masonry-gutter"></div>
-              <div class="genre-search" style="text-align: center;">
-          			<div class="panel panel-default">
-          				<div class="panel-heading">
-          				ジャンル検索
-          				</div>
-          				<div class="list-group">
-          					<% @genres.each do |genre| %>
-          						<div class="list-group-item">
-          						<%= link_to genre.name, items_path(genre_id: genre.id) %>
-          						</div>
-          					<% end %>
-          				</div>
-        		    </div>
-              </div>
-          </div>
-      	</div>
+        <%= render 'genre_search.html.erb', genres: @genres %>
 
     		<div class="col-xs-6 col-sm-9 col-md-10">
-          <div class="mansory-wrapper-cols">
-            <div class="masonry-gutter"></div>
+            <div class="gutter"></div>
       		    <div class="page-header text-left">
                 <% if @genre.present? %>
       				    <h1><%= @genre.name %>一覧</h1>
@@ -37,10 +18,10 @@
                   <% @items.each do |item| %>
                   <div class="col-md-3">
                     <div class="block-image">
-                      <%= attachment_image_tag item, :image %>
+                      <%= attachment_image_tag item, :image, fallback:"no_image.jpg", size: '127x89' %>
                     </div>
                     <div class="block-content">
-                      <p><%= item.name %></p>
+                      <p><%= link_to item.name, item_path(item.id) %></p>
                       <p>¥<%= item.price %>(+税)</p>
                     </div>
                   </div>
@@ -48,9 +29,8 @@
               </div>
 
               <%= paginate @items %>
-          </div>
         </div>
 
       </div>
-	 </div>
+    </div>
 </section>
