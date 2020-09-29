@@ -1,4 +1,5 @@
 class Admin::ItemsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @items = Item.page(params[:page]).reverse_order
   end
@@ -11,7 +12,7 @@ class Admin::ItemsController < ApplicationController
   	@item = Item.new(item_params)
   	if !params[:item][:genre_id].nil? && @item.save
   		flash[:notice] = "新しい商品が登録されました"
-  		redirect_to admin_item_path(@item.id)
+  		redirect_to admin_items_path
   	else
   		render :new
   	end
@@ -29,7 +30,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if @item.update(item_params)
       flash[:notice] = "新しい変更が保存されました"
-      redirect_to admin_item_path(@item.id)
+      redirect_to admin_items_path
     else
       render :edit
     end

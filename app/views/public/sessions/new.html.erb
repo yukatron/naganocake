@@ -1,26 +1,49 @@
-<h2>Log in</h2>
+<section class="slice slice-lg sct-color-1">
+  <div class="container">
+    <div class="row">
+        <%= render "public/customers/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <div class="form-user style-1 rounded has-shadow-1">
+        <div class="form-header text-left">
+          <h2 class="form-header-title">ログイン</h2>
+        </div>
+      </div>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2">
+          <div class="form-horizontal">
+
+            <%= form_for(resource, as: resource_name, url: customer_session_path) do |f| %>
+              <div class="form-group">
+                <label class="col-sm-4 control-label" for="email">メールアドレス</label><div class="col-sm-8">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-4 control-label" for="password">パスワード</label><div class="col-sm-8">
+                <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %></div>
+              </div>
+
+              <div class="form-group">
+                <%= f.submit "ログイン", class: "btn btn-primary col-sm-offset-4 col-sm-8" %>
+              </div>
+
+              <p class="text-right">
+              <%= link_to "=> パスワードを忘れた方はこちら", new_customer_password_path%>
+              </p>
+            <% end %>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="header text-left">
+        <h3 class="header-title">登録がお済みでない方</h3>
+      </div>
+      <div class="col-md-6 col-md-offset-2 justify">
+        <p><%= link_to "こちら", new_customer_registration_path %>から新規登録してください</p>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= render "customers/shared/links" %>
+</section>

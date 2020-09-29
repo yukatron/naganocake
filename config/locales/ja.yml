@@ -6,6 +6,8 @@ ja:
     models:
       genre: ジャンル
       item: 商品
+      admin: 管理者
+      customer: 顧客
     attributes:
       genre:
         name: ジャンル
@@ -16,3 +18,6 @@ ja:
         introduction: 商品説明
         price: 価格
         is_active: 販売ステータス
+      admin:
+        email: メールアドレス
+        password: パスワード

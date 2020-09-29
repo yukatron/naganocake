@@ -1,29 +1,88 @@
-<h2>Sign up</h2>
+<div class="body">
+  <div class="container">
+    <%= render "public/customers/shared/error_messages", resource: resource %>
+    <div class="row">
+      <div class="form-user style-1 rounded has-shadow-1">
+        <div class="form-header text-left">
+          <h2 class="form-header-title">新規登録</h2>
+        </div>
+      </div>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "customers/shared/error_messages", resource: resource %>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2 justify">
+        <div class="form-horizontal">
+          <%= form_for(resource, as: resource_name, url: customer_registration_path) do |f| %>
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="name">名前</label>
+              <div class="col-sm-4">
+              <p>(姓) </p><%= f.text_field :last_name, autofocus: true, autocomplete: "" %></div>
+              <div class="col-sm-4">
+              <p>(名) </p><%= f.text_field :first_name, autofocus: true, autocomplete: "" %></div>
+            </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="name">フリガナ</label>
+              <div class="col-sm-4">
+              <p>(セイ) </p><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "", class: "form-control" %></div>
+              <div class="col-sm-4">
+              <p>(ナ) </p><%= f.text_field :first_name_kana, autofocus: true, autocomplete: "", class: "form-control" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="email">メールアドレス</label><div class="col-sm-8">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="postal-code">郵便番号 (ハイフンなし)</label>
+              <div class="col-sm-4">
+              <%= f.text_field :postal_code, autofocus: true, autocomplete: "", class: "form-left" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="address">住所</label><div class="col-sm-8">
+              <%= f.text_field :address, autofocus: true, autocomplete: "", class: "form-control" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="tel">電話番号 (ハイフンなし)</label>
+              <div class="col-sm-4">
+              <%= f.text_field :tel, autofocus: true, autocomplete: "", class: "form-left" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="password">パスワード (6文字以上)</label>
+              <div class="col-sm-4">
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-left" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="password_confirmation">パスワード (確認用)</label>
+              <div class="col-sm-4">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-left" %></div>
+            </div>
+
+
+
+            <div class="form-group">
+              <%= f.submit "新規登録", class: "btn btn-primary col-sm-offset-4 col-sm-8" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="header text-left">
+        <h3 class="header-title">すでに登録済みの方</h3>
+      </div>
+      <div class="col-md-6 col-md-offset-2 justify">
+        <%= render "public/customers/shared/links" %>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "customers/shared/links" %>

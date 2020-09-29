@@ -1,2 +1,57 @@
-<h1>CartItems#index</h1>
-<p>Find me in app/views/cart_items/index.html.erb</p>
+<div class="body">
+	<div class="container">
+		<div class="row">
+			<div class="center-block">
+				<h2 class="page-header pull-left">ショッピングカート</h2><button class="btn btn-danger btn-sm">カートを空にする</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<table class="table table-bordered table-hover">
+				<thead class="active">
+					<tr style>
+						<th>商品名</th>
+						<th>単価 (税込)</th>
+						<th>数量</th>
+						<th>小計</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @total = 0 %>
+					<% @cart_items.each do |cart_item| %>
+					<tr>
+						<td><%= cart_item.item.name %></td>
+						<td><%= tax_added_currency(cart_item.item.price, 1.1) %></td>
+						<td><%= cart_item.quantity %></td>
+						<td><%= tax_added_currency(cart_item.item.price, 1.1) * cart_item.quantity %></td>
+						<td><% @total += tax_added_currency(cart_item.item.price, 1.1) * cart_item.quantity %></td>
+						<td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class:"btn btn-danger btn-sm" %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="row">
+			<%= link_to "買い物を続ける", items_path, class:"btn btn-primary btn-sm pull-left" %>
+			<table class="pull-right">
+				<tbody>
+					<tr>
+						<th class="active">合計金額</th>
+						<th><%= @total %>円</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="row">
+			<div class="center-block">
+				<%= link_to "情報入力に進む", new_order_path, class:"btn btn-success btn-block" %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Public::Customers::SessionsController < Devise::SessionsController
+class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -12,6 +12,10 @@ class Public::Customers::SessionsController < Devise::SessionsController
   # def create
   #   super
   # end
+
+  def after_sign_in_path_for(resource)
+    items_path
+  end
 
   # DELETE /resource/sign_out
   # def destroy

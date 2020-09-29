@@ -1,36 +1,38 @@
 <section class="slice slice-lg sct-color-1">
-  	<div class="container">
-      <div class="row">
+  <div class="body">
+      <div class="container">
+        <div class="row">
 
-        <%= render 'genre_search.html.erb', genres: @genres %>
+          <%= render 'genre_search.html.erb', genres: @genres %>
 
-    		<div class="col-xs-6 col-sm-9 col-md-10">
-            <div class="gutter"></div>
-      		    <div class="page-header text-left">
-                <% if @genre.present? %>
-      				    <h1><%= @genre.name %>一覧</h1>
-                <% else %>
-                  <h1>商品一覧</h1>
-                <% end %>
-      		    </div>
-
-              <div class="page-body">
-                  <% @items.each do |item| %>
-                  <div class="col-md-3">
-                    <div class="block-image">
-                      <%= attachment_image_tag item, :image, fallback:"no_image.jpg", size: '127x89' %>
-                    </div>
-                    <div class="block-content">
-                      <p><%= link_to item.name, item_path(item.id) %></p>
-                      <p>¥<%= item.price %>(+税)</p>
-                    </div>
-                  </div>
+      		<div class="col-xs-6 col-sm-9 col-md-10">
+              <div class="gutter"></div>
+        		    <div class="page-header text-left">
+                  <% if @genre.present? %>
+        				    <h1><%= @genre.name %>一覧</h1>
+                  <% else %>
+                    <h1>商品一覧</h1>
                   <% end %>
-              </div>
+        		    </div>
 
-              <%= paginate @items %>
+                <div class="page-body">
+                    <% @items.each do |item| %>
+                    <div class="col-xs-6 col-md-3" style="height: 10em;">
+                      <div class="block-image">
+                        <%= attachment_image_tag item, :image, fallback:"no_image.jpg", size: '127x89' %>
+                      </div>
+                      <div class="block-content">
+                        <p><%= link_to item.name, item_path(item.id) %></p>
+                        <p><%= number_to_currency(item.price) %> (+税)</p>
+                      </div>
+                    </div>
+                    <% end %>
+                </div>
+
+                <%= paginate @items %>
+          </div>
+
         </div>
-
       </div>
     </div>
 </section>
