@@ -1,38 +1,34 @@
-<section class="slice slice-lg sct-color-1">
-  <div class="body">
-      <div class="container">
-        <div class="row">
-
+<section class="items">
+  <div class="container">
           <%= render 'genre_search.html.erb', genres: @genres %>
 
-      		<div class="col-xs-6 col-sm-9 col-md-10">
-              <div class="gutter"></div>
-        		    <div class="page-header text-left">
-                  <% if @genre.present? %>
-        				    <h1><%= @genre.name %>一覧</h1>
-                  <% else %>
-                    <h1>商品一覧</h1>
-                  <% end %>
-        		    </div>
+          <div class="col-xs-10">
 
-                <div class="page-body">
-                    <% @items.each do |item| %>
-                    <div class="col-xs-6 col-md-3" style="height: 10em;">
-                      <div class="block-image">
-                        <%= attachment_image_tag item, :image, fallback:"no_image.jpg", size: '127x89' %>
-                      </div>
-                      <div class="block-content">
-                        <p><%= link_to item.name, item_path(item.id) %></p>
-                        <p><%= number_to_currency(item.price) %> (+税)</p>
-                      </div>
+            <div class="wrapper-title">
+              <% if @genre.present? %>
+                <h3><%= @genre.name %>一覧</h3>
+              <% else %>
+                <h3>商品一覧</h3>
+              <% end %>
+
+              <div class="item-list">
+                <ul class="list-group">
+                <% @items.each do |item| %>
+                  <li class=" list-group-item col-xs-6 col-md-3" style="border: none;">
+                    <%= attachment_image_tag item, :image, fallback:"no_image.jpg", size: '127x89', class:"img-responsive center-block" %>
+                    <div class="item-body">
+                      <h5><%= link_to item.name, item_path(item.id) %></h5>
+                      <p><%= number_to_currency(item.price) %> (+税)</p>
                     </div>
-                    <% end %>
-                </div>
+                  </li>
+                <% end %>
+                </ul>
+              </div>
 
-                <%= paginate @items %>
+              <%= paginate @items %>
+            </div>
+
           </div>
 
-        </div>
-      </div>
-    </div>
-</section>
+  </div>
+</div>

@@ -2,9 +2,9 @@ class Public::CartItemsController < ApplicationController
 	before_action :authenticate_customer!
 
   def create
-  	@cart_item = CartItem.new(cart_item_params)
-    @cart_item.customer_id = current_customer.id
-  	@cart_item.save
+  	cart_item = CartItem.new(cart_item_params)
+    cart_item.customer_id = current_customer.id
+  	cart_item.save
   	redirect_to items_path
   end
 
@@ -26,4 +26,11 @@ class Public::CartItemsController < ApplicationController
   def cart_item_params
   	params.require(:cart_item).permit(:item_id, :quantity)
   end
+
+  def set_customer
+    @customer = current_customer
+  end
+
+  def set_item
+    @item = current_cart_item.
 end

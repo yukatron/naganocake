@@ -1,50 +1,80 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Naganocake</title>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2877cf98d2.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Naganocake</title>
+
   </head>
 
   <body>
     <header>
-      <nav class="navbar navbar-inverse">
-        <div class="container">
-          <div class="collapse navbar-collapse" id="navbarheader">
-            <ul class="nav nav-pills">
-              <% if customer_signed_in? %>
-                <%= welcome(current_customer.first_name) %>
-                <li>マイページ</li>
-                <li><%= link_to "商品一覧", items_path %></li>
-                <li><%= link_to "カート", cart_items_path %></li>
-                <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
-              <% elsif admin_signed_in? %>
-                <li><%= link_to "商品一覧", admin_items_path %></li>
-                <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
-                <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
-                <p> ようこそ、管理人さん！ </p>
-              <% else %>
-                <li><%= link_to "About", about_path %></li>
-                <li><%= link_to "商品一覧", items_path %></li>
-                <li><%= link_to "新規登録", new_customer_registration_path %></li>
-                <li><%= link_to "ログイン", new_customer_session_path%></li>
-              <% end %>
-            </ul>
-            <form class="navbar-form navbar-right" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="検索キーワード">
+      <div class="header">
+        <nav class="navbar navbar-default">
+          <div class="container relative">
+
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbarheader">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <p class="navbar-brand"><strong>LOGO</strong></p>
               </div>
-              <button type="submit" class="btn btn-default">検索</button>
-            </form>
-          </div>
-        </div>
-      </nav>
+              <div class="collapse navbar-collapse" id="navbarheader">
+                <ul class="nav navbar-nav">
+                  <% if customer_signed_in? %>
+                    <li>マイページ</li>
+                    <li><%= link_to "商品一覧", items_path %></li>
+                    <li><%= link_to cart_items_path do %>
+                      <i class="fas fa-shopping-cart"></i>カート<% end %>
+                    </li>
+                    <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
+                    <p class="navbar-text navbar-right"><%= welcome(current_customer.first_name) %></p>
+                  <% elsif admin_signed_in? %>
+                    <li><%= link_to "商品一覧", admin_items_path %></li>
+                    <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
+                    <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+                    <p class="navbar-text navbar-right"> ようこそ、管理人さん！ </p>
+                  <% else %>
+                    <li><%= link_to "About", about_path %></li>
+                    <li><%= link_to "商品一覧", items_path %></li>
+                    <li><%= link_to "新規登録", new_customer_registration_path %></li>
+                    <li><%= link_to "ログイン", new_customer_session_path%></li>
+                  <% end %>
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="検索キーワード">
+                  </div>
+                  <button type="submit" class="btn btn-default">検索</button>
+                </form>
+              </div>
+            </div>
+        </nav>
+      </div>
     </header>
+
+    <main class="clearfix">
     <%= yield %>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p class="pull-right">
+          <strong>ながのCake</strong><br>
+          ooo-oooo 長野県xx市△△町oo番地<br>
+        tel: oo-oooo-oooo</p>
+        <p class="lead text-justify"> Copyright@Infratop.inc </p>
+      </div>
+    </footer>
   </body>
 </html>

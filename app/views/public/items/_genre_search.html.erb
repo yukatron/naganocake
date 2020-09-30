@@ -1,19 +1,14 @@
-<div class="col-xs-6 col-sm-3 col-md-2">
-  <div class="masonry-wrapper-cols">
-    <div class="masonry-gutter"></div>
-      <div class="genre-search" style="text-align: center;">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-          	ジャンル検索
-          </div>
-          <div class="list-group">
-            <% genres.each do |genre| %>
-          		<div class="list-group-item">
-          		  <%= link_to genre.name, items_path(genre_id: genre.id) %>
-          		</div>
-          	<% end %>
-          </div>
-        </div>
+<div class="sidebar col-xs-2">
+  <section class="genre-search" style="text-align: center;">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        ジャンル検索
       </div>
-   </div>
+      <% genres.each do |genre| %>
+        <div class="panel-body">
+          <%= link_to genre.name, items_path(genre_id: genre.id) %>
+        </div>
+      <% end %>
+    </div>
+  </section>
 </div>
