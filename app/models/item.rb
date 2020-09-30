@@ -2,6 +2,7 @@ class Item < ApplicationRecord
 	attachment :image
 	belongs_to :genre
 	has_many :cart_items
+
 	has_many :cart_details
 
 	validates :name, presence: true, length: { maximum: 15 }

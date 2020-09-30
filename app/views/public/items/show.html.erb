@@ -22,7 +22,7 @@
 
 		            	<div class="row" style="height:3em;">
 		            		<div class="form-inline">
-		            			<%= form_for(@cart_item, url: cart_items_path(item_id: @item.id)) do |f| %>
+		            			<%= form_with(model: @cart_item, url: cart_items_path(item_id: @item.id), method: :post) do |f| %>
 		            			<div class="form-group">
 		            				<div class="input-group">
 		            				<%= f.text_field :quantity, class:"form-control", placeholder:"個数を入力してください" %><span class="input-group-addon">個</span>
