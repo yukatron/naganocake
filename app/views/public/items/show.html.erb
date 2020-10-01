@@ -1,6 +1,7 @@
 <section class="items">
 	<%= render 'layouts/error_messages', hoge: @cart_item %>
   <div class="container">
+  	<p id="notice"><%= notice %></p>
           <%= render 'genre_search.html.erb', genres: @genres %>
 
 		<div class="col-xs-10">
