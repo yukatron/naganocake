@@ -1,4 +1,5 @@
 <section class="items">
+	<%= render 'layouts/error_messages', hoge: @cart_item %>
   <div class="container">
           <%= render 'genre_search.html.erb', genres: @genres %>
 
@@ -21,8 +22,8 @@
 
 		            <div class="row">
 		            		<%= form_with(model: @cart_item, url: cart_items_path, method: :post) do |f| %>
-		            		<% f.text_field :item_id, placeholder: @item.id %>
 		            			<div class="col-xs-2">
+		            				<%= f.hidden_field :item_id, :value => @item.id %>
 		            				<%= f.text_field :quantity, class:"form-control", placeholder:"1" %>
 		            			</div>
 		            			<div class="col-xs-3">
