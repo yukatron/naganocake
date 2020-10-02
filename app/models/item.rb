@@ -4,6 +4,7 @@ class Item < ApplicationRecord
 	has_many :cart_items
 
 	has_many :cart_details
+	has_many :orders, through: :cart_details
 
 	validates :name, presence: true, length: { maximum: 15 }
 	validates :introduction, presence: true, length: { maximum: 70 }

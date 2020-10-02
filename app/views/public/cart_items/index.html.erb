@@ -1,8 +1,9 @@
 <div class="body">
 	<div class="container">
+		<p id="notice"><%= notice %></p>
 		<div class="row">
 			<div class="center-block">
-				<h2 class="page-header pull-left">ショッピングカート</h2><button class="btn btn-danger btn-sm">カートを空にする</button>
+				<h2 class="page-header pull-left">My Cart</h2><%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class:"btn btn-danger btn-sm pull-right" %>
 			</div>
 		</div>
 
@@ -24,9 +25,16 @@
 						<td><%= cart_item.item.name %></td>
 						<td><%= tax_added_currency(cart_item.item.price, 1.1) %></td>
 						<td><%= cart_item.quantity %></td>
-						<td><%= tax_added_currency(cart_item.item.price, 1.1) * cart_item.quantity %></td>
-						<td><% @total += tax_added_currency(cart_item.item.price, 1.1) * cart_item.quantity %></td>
-						<td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class:"btn btn-danger btn-sm" %></td>
+						<td><%= subtotal(cart_item.item.price, 1.1, cart_item.quantity) %></td>
+						<td>
+							<% @total += ((cart_item.item.price * 1.1).round)*cart_item.quantity %>
+							<%= form_with(model: cart_item, url: cart_item_path(id: cart_item.id)) do |f| %>
+								<div class="col-xs-2">
+								<%= f.text_field :quantity, class:"form-control input-sm" %></div><div class="col-xs-3">
+								<%= f.submit "数量を変更" %></div>
+							<% end %>
+							<%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class:"btn btn-danger btn-sm pull-left" %>
+						</td>
 					</tr>
 					<% end %>
 				</tbody>
@@ -38,8 +46,8 @@
 			<table class="pull-right">
 				<tbody>
 					<tr>
-						<th class="active">合計金額</th>
-						<th><%= @total %>円</th>
+						<th class="active">合計金額：</th>
+						<th><%= @total.to_s(:delimited) %>円</th>
 					</tr>
 				</tbody>
 			</table>
