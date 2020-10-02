@@ -16,7 +16,7 @@
                 <ul class="list-group">
                 <% @items.each do |item| %>
                   <li class=" list-group-item col-xs-6 col-md-3" style="border: none;">
-                    <%= attachment_image_tag item, :image, fallback:"no_image.jpg", size: '127x89', class:"img-responsive center-block" %>
+                    <%= attachment_image_tag item, :image, fallback:"no_image.jpg", class:"center-block img-responsive" %>
                     <div class="list-items">
                       <%= link_to item.name, item_path(item.id), class:"btn btn-default btn-block", style:"border: none;" %>
                       <p class="text-center"><%= number_to_currency(item.price) %> (+税)</p>
@@ -26,7 +26,7 @@
                 </ul>
               </div>
 
-              <%= paginate @items %>
+              <%= paginate @items, class:"pagination" %>
             </div>
 
           </div>

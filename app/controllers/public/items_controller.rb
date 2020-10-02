@@ -1,5 +1,7 @@
 class Public::ItemsController < ApplicationController
   def top
+    @genres = Genre.all
+    @items = Item.where(favorite: true).page(params[:page]).per(4)
   end
 
   def about
@@ -21,4 +23,5 @@ class Public::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @cart_item = CartItem.new
   end
+
 end
