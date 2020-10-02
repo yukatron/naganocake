@@ -4,6 +4,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
   end
 
   def thanks
@@ -16,6 +18,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
+    params.require(:order).permit(:customer_id, :postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
   end
 end
