@@ -43,14 +43,11 @@ class Public::CartItemsController < ApplicationController
     end
   end
 
-
-
   def destroy_all
     CartItem.where(customer_id: current_customer.id).destroy_all
     flash[:notice] = "カートを空にしました"
     redirect_to items_path
   end
-
 
   private
   def cart_item_params
