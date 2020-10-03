@@ -32,7 +32,7 @@
               <div class="collapse navbar-collapse" id="navbarheader">
                 <ul class="nav navbar-nav">
                   <% if customer_signed_in? %>
-                    <li>マイページ</li>
+                    <li><%= link_to "マイページ", customer_path(current_customer.id) %></li>
                     <li><%= link_to "商品一覧", items_path %></li>
                     <li><%= link_to cart_items_path do %>
                       <i class="fas fa-shopping-cart"></i>カート<% end %>

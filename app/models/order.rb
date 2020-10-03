@@ -4,7 +4,7 @@ class Order < ApplicationRecord
 	has_many :order_details
 	has_many :items, through: :order_details
 
-	validates :shipping_cost, default: 800
+	validates :shipping_cost, presence: true
 
 	enum payment_method: {
 		credit_card: 0,
@@ -18,5 +18,6 @@ class Order < ApplicationRecord
 		prepare_shipping: 3,
 		shipped: 4
 	}
+
 	attr_accessor :address_option
 end

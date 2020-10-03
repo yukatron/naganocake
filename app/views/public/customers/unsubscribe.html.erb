@@ -1,2 +1,23 @@
-<h1>Customers#unsubscribe</h1>
-<p>Find me in app/views/customers/unsubscribe.html.erb</p>
+<div class="body">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-11 center-block">
+				<p class="lead text-center">本当に退会しますか？</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-11 center-block">
+				<p class="text-center">退会すると、会員登録情報や<br>
+					これまでの購入履歴が閲覧できなくなります。<br>
+					退会する場合は、「退会する」をクリックしてください。</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="btn-group center-block">
+				<%= link_to "退会しない", customer_path(current_customer.id) class:"btn btn-primary btn-sm col-sm-3" %>
+          		<%= link_to '退会する', withdraw_path(current_customer.id), method: :patch, class:"btn btn-danger btn-sm col-sm-3 col-xs-offset-1" %>
+          	</div>
+        </div>
+    </div>
+</div>
