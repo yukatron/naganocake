@@ -1,2 +1,63 @@
-<h1>Addresses#index</h1>
-<p>Find me in app/views/addresses/index.html.erb</p>
+<div class="body">
+	<div class="container">
+		<p id="notice"><%= notice %></p>
+		<div class="row">
+			<div class="page-header col-xs-11 center-block">
+				<h3>配送先登録・一覧</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-10">
+        		<div class="form-horizontal">
+          			<%= form_for(@add) do |f| %>
+          				<div class="form-group">
+              				<label class="col-sm-3 control-label" for="postal-code">郵便番号 (ハイフンなし)</label>
+              				<div class="col-sm-4">
+              				<%= f.text_field :postal_code, autofocus: true, autocomplete: "", class:"form-control" %></div>
+           				</div>
+
+           				<div class="form-group">
+              				<label class="col-sm-3 control-label" for="address">住所</label>
+              				<div class="col-sm-6">
+              				<%= f.text_field :address, autofocus: true, autocomplete: "", class: "form-control" %></div>
+            			</div>
+
+            			<div class="form-group">
+            				<label class="col-sm-3 control-label" for="name">宛名</label>
+            				<div class="col-sm-4">
+            				<%= f.text_field :name, autofocus: true, autocomplete: "", class:"form-control" %></div>
+            			</div>
+
+            			<%= f.submit "登録する", class:"btn btn-success btn-sm col-xs-3" %>
+
+          			<% end %>
+          		</div>
+          	</div>
+        </div>
+
+        <div class="row">
+        	<table class="table table-bordered">
+        		<thead class="active">
+        			<tr style>
+        				<th>郵便番号</th>
+        				<th>住所</th>
+        				<th>宛名</th>
+        				<th></th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<% @adds.each do |add| %>
+        			<tr style>
+        				<td><%= add.postal_code %></td>
+        				<td><%= add.address %></td>
+        				<td><%= add.name %></td>
+        				<td><%= link_to "編集する", edit_address_path(add.id), class:"btn btn-primary btn-sm" %>
+        					<%= link_to "削除する", address_path(add.id), method: :delete, class:"btn btn-danger btn-sm" %>
+        				</td>
+        			</tr>
+        			<% end %>
+        		</tbody>
+        	</table>
+        </div>
+    </div>
+</div>

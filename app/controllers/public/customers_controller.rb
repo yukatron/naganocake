@@ -17,11 +17,13 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
+  	@customer = Customer.find(params[:id])
   end
 
   def withdraw
   	customer = Customer.find(params[:id])
-  	customer.destroy
+  	customer.is_deleted = true
+  	customer.update
   	redirect_to root_path
   end
 
