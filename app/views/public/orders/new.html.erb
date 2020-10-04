@@ -1,21 +1,22 @@
 <div class="body">
 	<div class="container">
 		<%= render 'layouts/error_messages', hoge: @order %>
-
+		<div class="notice"><% notice %></div>
 		<div class="row">
-			<div class="col-xs-offset-1 col-xs-11">
+			<div class="col-xs-offset-1 col-xs-10">
 				<h3 class="page-header pull-left">注文情報入力</h3>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="form justify col-xs-offset-2">
-			<%= form_with(model: @order, url: order_confirm_path, method: :post) do |f| %>
+			<div class="form justify col-xs-offset-2 col-xs-9">
+			<%= form_for(@order, url: order_confirm_path(@order.id), method: :post) do |f| %>
+				<%= f.hidden_field :customer_id, :value => current_customer.id %>
 				<div class="form-group">
 					<label><span class="glyphicon glyphicon-stop"></span>支払い方法</label>
 					<div class="radio col-xs-offset-1 col-xs-11">
-						<label><%= f.radio_button :payment_method, '0' %>クレジットカード</label><br />
-						<label><%= f.radio_button :payment_method, '1' %>銀行振込</label>
+						<label><%= f.radio_button :payment_method, :クレジットカード %>クレジットカード</label><br />
+						<label><%= f.radio_button :payment_method, :銀行振込 %>銀行振込</label>
 					</div>
 				</div>
 
@@ -24,44 +25,49 @@
 
 					<!-- Customerテーブルから自身の住所 -->
 					<div class="radio col-xs-offset-1 col-xs-11">
-						<label>
-							<%= f.radio_button :address_option, '0' %>
-							ご自身の住所<br />
-							<div class="col-xs-offset-3 col-xs-9"><%= current_customer.postal_code %>  <%= current_customer.address %><br><%= current_customer.last_name %> <%= current_customer.first_name %></div>
-						</label>
-					</div><br>
+						<label><%= radio_button_tag("_add", "usersAdd") %>ご自身の住所</label>
+						<div class="col-xs-offset-3 col-xs-9">
+							<%= current_customer.postal_code %><br /><%= current_customer.address %><br><%= current_customer.last_name %> <%= current_customer.first_name %>
+						</div>
+					</div>
 
 					<!-- Addressテーブルから登録済み住所 -->
 					<div class="radio col-xs-offset-1 col-xs-11">
-						<%= f.radio_button :address_option, '1' %>
-						<%= f.label :address, '登録済住所から選択' %><br />
-							<div class="col-xs-offset-3 col-xs-9">
-								<%= f.select :address, current_customer.addresses.map{|a| [a.address, a.id]}, {prompt: true} %></div>
-					</div><br />
+						<label><%= radio_button_tag("_add", "shipAdds") %>登録済住所から選択</label>
+					</div>
+						<div class="col-xs-offset-3 col-xs-9">
+								<%= collection_select(:Address, :id, @ads, :id, :address) %>
+						</div>
 
 					<!-- 新規で新しい住所 -->
 					<div class="radio col-xs-offset-1 col-xs-11">
-						<%= f.radio_button :address_option, '2' %>
-						<%= f.label :address, '新しいお届け先' %><br>
-						<div>
-							<%= f.label :postal_code, "郵便番号 (ハイフンなし)" %>
-							<%= f.text_field :postal_code %>
-						</div>
-						<div>
-							<%= f.label :address, "住所" %>
-							<%= f.text_area :address %>
-						</div>
-						<div>
-							<%= f.label :name, "宛名" %>
-							<%= f.text_field :name %>
-						</div><br />
+						<label><%= radio_button_tag("_add", "newAdd") %>新しいお届け先</label>
 					</div>
+						<div id="form" class="form-horizontal col-xs-offset-3 col-xs-9">
+							<%= fields_for(@address) do |a| %>
+							<%= f.hidden_field :customer_id, :value => current_customer.id %>
+							<div class="form-group">
+								<label for="postal_code">郵便番号 (ハイフン)</label>
+								<%= a.text_field :postal_code, class:"form-control" %>
+							</div>
 
-					<div class="actions">
-						<%= f.submit "確認画面へ進む", class:"btn btn-primary" %>
-					</div>
+							<div class="form-group">
+								<label for="address">住所</label>
+								<%= a.text_area :address, class:"form-control" %>
+							</div>
 
+							<div class="form-group">
+								<label for="name">宛名</label>
+								<%= a.text_field :name, class:"form-control" %>
+							</div>
+
+							<% end %>
+						</div>
 				</div>
+
+				<div class="actions text-center">
+					<%= f.submit "確認画面へ進む", class:"btn btn-primary btn-block"%>
+				</div><br />
 
 			<% end %>
 			</div>

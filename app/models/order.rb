@@ -1,23 +1,25 @@
 class Order < ApplicationRecord
 
 	belongs_to :customer
-	has_many :order_details
+	has_many :order_details, dependent: :destroy
 	has_many :items, through: :order_details
+	accepts_nested_attributes_for :order_details
 
-	validates :shipping_cost, presence: true
+	validates :postal_code, presence: true, format: {with: /\A\d{7}\z/}
+	validates :address,presence: true
+	validates :name, presence: true
 
 	enum payment_method: {
-		credit_card: 0,
-		bank_transfer: 1
+		クレジットカード: 0,
+		銀行振込: 1
 	}
 
 	enum status: {
-		wait: 0,
-		payment_confirm: 1,
-		in_production: 2,
-		prepare_shipping: 3,
-		shipped: 4
+		入金待ち: 0,
+		入金確認: 1,
+		製作中: 2,
+		発送準備中: 3,
+		発送済み: 4
 	}
 
-	attr_accessor :address_option
 end

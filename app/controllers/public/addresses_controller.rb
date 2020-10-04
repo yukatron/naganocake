@@ -17,6 +17,21 @@ class Public::AddressesController < ApplicationController
   end
 
   def edit
+    @add = Address.find(params[:id])
+  end
+
+  def update
+    @add = Address.find(params[:id])
+    @add.update(address_params)
+    flash[:notice] ="配送先を編集しました"
+    redirect_to addresses_path
+  end
+
+  def destroy
+    add = Address.find(params[:id])
+    add.destroy
+    flash[:notice] ="配送先を削除しました"
+    redirect_to addresses_path
   end
 
   private

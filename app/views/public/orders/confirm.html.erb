@@ -1,2 +1,66 @@
-<h1>Orders#confirm</h1>
-<p>Find me in app/views/orders/confirm.html.erb</p>
+<div class="body">
+	<div class="container">
+		<div class="notice"><% notice %></div>
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-10">
+				<h3 class="page-header pull-left">注文情報確認</h3>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-8">
+				<table class="table table-bordered">
+					<thead>
+						<tr style>
+							<th>商品名</th>
+							<th>単価 (税込)</th>
+							<th>数量</th>
+							<th>小計</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr style>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-xs-4">
+				<table class="table table-bordered">
+					<tbody>
+						<tr style>
+							<td class="active">送料</td>
+							<td></td>
+						</tr>
+						<tr style>
+							<td class="active">商品合計</td>
+							<td></td>
+						</tr>
+						<tr style>
+							<td class="active">請求金額</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<label><span class="glyphicon glyphicon-stop"></span>支払い方法</label>
+			<p>（支払い方法)</p>
+		</div>
+
+		<div class="row">
+			<label><span class="glyphicon glyphicon-stop"></span>お届け先</label>
+			<p>（届け先情報)</p>
+		</div>
+
+		<div class="row">
+			<%= link_to "購入を確定する", thanks_path, class:"btn btn-success btn-sm" %>
+		</div><br />
+	</div>
+</div>
+

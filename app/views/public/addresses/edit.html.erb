@@ -1,2 +1,38 @@
-<h1>Addresses#edit</h1>
-<p>Find me in app/views/addresses/edit.html.erb</p>
+<div class="body">
+	<div class="container">
+		<%= render 'layouts/error_messages', hoge: @add %>
+		<div class="row">
+			<div class="page-header col-xs-11 center-block">
+				<h3>配送先編集</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-10">
+        		<div class="form-horizontal">
+          			<%= form_for(@add) do |f| %>
+          				<div class="form-group">
+              				<label class="col-sm-3 control-label" for="postal-code">郵便番号 (ハイフンなし)</label>
+              				<div class="col-sm-4">
+              				<%= f.text_field :postal_code, autofocus: true, autocomplete: "", class:"form-control" %></div>
+           				</div>
+
+           				<div class="form-group">
+              				<label class="col-sm-3 control-label" for="address">住所</label>
+              				<div class="col-sm-6">
+              				<%= f.text_field :address, autofocus: true, autocomplete: "", class: "form-control" %></div>
+            			</div>
+
+            			<div class="form-group">
+            				<label class="col-sm-3 control-label" for="name">宛名</label>
+            				<div class="col-sm-4">
+            				<%= f.text_field :name, autofocus: true, autocomplete: "", class:"form-control" %></div>
+            			</div>
+
+            			<%= f.submit "編集する", class:"btn btn-primary btn-sm col-xs-3" %>
+
+          			<% end %>
+          		</div>
+          	</div>
+        </div>
+    </div>
+</div>
