@@ -8,13 +8,13 @@ Rails.application.routes.draw do
 			registrations: 'public/registrations',
 			sessions: 'public/sessions'
 		}
-		resources :addresses, only: [:index, :edit]
+		resources :addresses, only: [:index, :create, :edit, :update, :destroy]
 		get 'items/about' => 'items#about', as: 'about'
 		resources :items, only: [:index, :show]
 			get 'items/top' => 'items#top'
 		resources :customers, only: [:show, :edit, :update]
-			get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
-			patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
+			get 'customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+			patch 'customers/:id/withdraw' => 'customers#withdraw', as: 'withdraw'
 		resources :cart_items, only: [:index, :create, :update, :destroy] do
 			collection do
 				delete 'destroy_all'

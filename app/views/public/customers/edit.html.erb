@@ -1,2 +1,61 @@
-<h1>Customers#edit</h1>
-<p>Find me in app/views/customers/edit.html.erb</p>
+<div class="body">
+  <div class="container">
+    <%= render "layouts/error_messages", hoge: @customer %>
+    <div class="row">
+      <div class="form-user style-1 rounded has-shadow-1">
+        <div class="form-header text-left">
+          <h4 class="form-header-title">登録情報編集</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-10">
+        <div class="form-horizontal">
+          <%= form_for(@customer, url: customer_path(@customer.id)) do |f| %>
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="name">名前</label>
+              <div class="col-sm-4">
+              <p>　(姓) <%= f.text_field :last_name, autofocus: true, autocomplete: "", class:"form-control" %></p></div>
+              <div class="col-sm-4">
+              <p>(名) <%= f.text_field :first_name, autofocus: true, autocomplete: "", class:"form-control" %></p></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="name">フリガナ</label>
+              <div class="col-sm-4">
+              <p>(セイ) <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "", class:"form-control" %></p></div>
+              <div class="col-sm-4">
+              <p>(ナ) <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "", class:"form-control" %></p></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="email">メールアドレス</label><div class="col-sm-8">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="postal-code">郵便番号 (ハイフンなし)</label>
+              <div class="col-sm-4">
+              <%= f.text_field :postal_code, autofocus: true, autocomplete: "", class:"form-control" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="address">住所</label><div class="col-sm-8">
+              <%= f.text_field :address, autofocus: true, autocomplete: "", class: "form-control" %></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="tel">電話番号 (ハイフンなし)</label>
+              <div class="col-sm-4">
+              <%= f.text_field :tel, autofocus: true, autocomplete: "", class:"form-control"%></div>
+            </div>
+
+              <%= f.submit "編集保存", class: "btn btn-primary btn-sm col-sm-4 col-xs-offset-3" %>
+          <% end %>
+        </div>
+
+          	<%= link_to "退会する", unsubscribe_path(@customer.id), class:"btn btn-danger btn-sm col-sm-4 col-xs-offset-1" %>
+      </div>
+    </div>
+</div>

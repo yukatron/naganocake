@@ -1,2 +1,55 @@
-<h1>Customers#show</h1>
-<p>Find me in app/views/customers/show.html.erb</p>
+<div class="body">
+	<div class="container">
+		<p id="notice"><%= notice %></p>
+		<div class="row">
+			<div class="page-header col-xs-11 center-block">
+				<h3>マイページ</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-11 center-block">
+				<h4 class="text-left">登録情報</h4>
+				<div class="text-right">
+				<%= link_to "編集する", edit_customer_path(@customer.id), class:"btn btn-primary btn-sm" %>
+				<%= link_to "パスワードを変更する", edit_customer_password_path(@customer.id), class:"btn btn-primary btn-sm" %>
+				</div><br>
+				<table class="table table-bordered">
+					<tbody>
+						<tr style>
+							<th class="col-xs-4 active">氏名</th>
+							<th class="col-xs-8"><%= @customer.last_name %>  <%= @customer.first_name %></th>
+						</tr>
+						<tr style>
+							<th class="col-xs-4 active">カナ</th>
+							<th class="col-xs-8"><%= @customer.last_name_kana %>  <%= @customer.first_name_kana %></th>
+						</tr>
+						<tr style>
+							<th class="col-xs-4 active">郵便番号</th>
+							<th class="col-xs-8"><%= @customer.postal_code %></th>
+						</tr>
+						<tr style>
+							<th class="col-xs-4 active">住所</th>
+							<th class="col-xs-8"><%= @customer.address %></th>
+						</tr>
+						<tr style>
+							<th class="col-xs-4 active">電話番号</th>
+							<th class="col-xs-8"><%= @customer.tel %></th>
+						</tr>
+						<tr style>
+							<th class="col-xs-4 active">メールアドレス</th>
+							<th class="col-xs-8"><%= @customer.email %></th>
+						</tr>
+					</tbody>
+				</table>
+				<h4 class="text-left">配送先</h4>
+				<div class="text-right">
+				<%= link_to "一覧を見る", addresses_path, class:"btn btn-primary btn-sm" %>
+				</div><br />
+				<h4 class="text-left">注文履歴</h4>
+				<div class="text-right">
+				<%= link_to "一覧を見る", orders_path, class:"btn btn-primary btn-sm" %>
+				</div><br />
+			</div>
+		</div>
+	</div>
+</div>
