@@ -14,5 +14,6 @@ class Customer < ApplicationRecord
   validates :address,presence: true
   validates :tel, presence: true, format: {with: /\A\d{10,11}\z/}
   validates :email, presence: true
+  validates :is_deleted, default: false
 
 end
