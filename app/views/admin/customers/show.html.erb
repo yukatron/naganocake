@@ -1,2 +1,66 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class="body">
+	<div class="container">
+		<div class="row">
+			<div class="page-header">
+				<h3><%= @customer.last_name %> <%= @customer.first_name %>さんの会員詳細</h3>
+			</div>
+
+			<div class="row" style="margin: 1em;">
+				<div class="col-xs-3">
+				<label for="id">顧客ID</label></div>
+				<div class="col-xs-6">
+				<p class="id"><%= @customer.id %><% if @customer.is_deleted == true %> <span class="label label-warning" style="margin-left: 2em;">無効会員</span><% else %><span class="label label-info" style="margin-left: 2em;">有効会員</span><% end %></p></div>
+			</div>
+
+			<div class="row" style="margin: 1em;">
+				<div class="col-xs-3">
+			    <label for="name">氏名</label></div>
+			    <div class="col-xs-6">
+			    <p class="name"><%= @customer.last_name %> <%= @customer.first_name %></p></div>
+		    </div>
+
+		    <div class="row" style="margin: 1em;">
+		    	<div class="col-xs-3">
+			    <label for="name_kana">フリガナ</label></div>
+			    <div class="col-xs-6">
+			    <p class="name_kana"><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></p></div>
+		    </div>
+
+		    <div class="row" style="margin: 1em;">
+		    	<div class="col-xs-3">
+		    	<label for="postal_code">郵便番号</label></div>
+		    	<div class="col-xs-6">
+		    	<p class="postal_code"><%= @customer.postal_code %></p></div>
+		    </div>
+
+		    <div class="row" style="margin: 1em;">
+		    	<div class="col-xs-3">
+		    	<label for="address">住所</label></div>
+		    	<div class="col-xs-6">
+		    	<p class="address"><%= @customer.address %></p></div>
+		    </div>
+
+		    <div class="row" style="margin: 1em;">
+		    	<div class="col-xs-3">
+		    	<label for="tel">電話番号</label></div>
+		    	<div class="col-xs-6">
+		    	<p class="tel"><%= @customer.tel %></p></div>
+		    </div>
+
+		    <div class="row" style="margin: 1em;">
+		    	<div class="col-xs-3">
+		    	<label for="email">メールアドレス</label></div>
+		    	<div class="col-xs-6">
+		    	<p class="email"><%= @customer.email %></p></div>
+		    </div>
+
+		    <div class="row" style="margin: 1em;">
+		    	<div class="col-xs-9 text-center">
+		    	<%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-primary btn-sm" %>
+		    	<%= link_to "注文履歴一覧を見る", admin_orders_path(@customer.id), class:"btn btn-primary btn-sm" %></div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+

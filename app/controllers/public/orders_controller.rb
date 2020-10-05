@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :ensure_current_customer
   def new
     if current_customer.cart_items.blank?
       flash[:notice] = "カートが空です"

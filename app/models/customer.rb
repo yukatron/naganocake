@@ -16,4 +16,8 @@ class Customer < ApplicationRecord
   validates :email, presence: true
   validates :is_deleted, default: false
 
+  def active_for_authentication?
+    super && (self.is_deleted != true)
+  end
+
 end
