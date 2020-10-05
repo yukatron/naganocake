@@ -19,12 +19,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr style>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+						<% @total = 0 %>
+						<% @items.each do |item| %>
+						<tr style="height: 4em:">
+							<td><%= attachment_image_tag item.item, :image, class:"img-responsive" %>  <%= item.item.name %></td>
+							<td><%= tax_added_currency(item.item.price, 1.1) %></td>
+							<td><%= item.quantity %></td>
+							<td><%= subtotal(item.item.price, 1.1, item.quantity) %>
+								<% @total += ((item.item.price * 1.1).round)*item.quantity %>
+							</td>
 						</tr>
+						<% end %>
 					</tbody>
 				</table>
 			</div>
@@ -33,15 +38,15 @@
 					<tbody>
 						<tr style>
 							<td class="active">送料</td>
-							<td></td>
+							<td>800</td>
 						</tr>
 						<tr style>
 							<td class="active">商品合計</td>
-							<td></td>
+							<td><%= @total.to_s(:delimited, delimiter: ',') %></td>
 						</tr>
 						<tr style>
 							<td class="active">請求金額</td>
-							<td></td>
+							<td><%= (@total + 800).to_s(:delimited, delimiter: ',') %></td>
 						</tr>
 					</tbody>
 				</table>
@@ -50,16 +55,16 @@
 
 		<div class="row">
 			<label><span class="glyphicon glyphicon-stop"></span>支払い方法</label>
-			<p>（支払い方法)</p>
+			<p><%= @order.payment_method %></p>
 		</div>
 
 		<div class="row">
 			<label><span class="glyphicon glyphicon-stop"></span>お届け先</label>
-			<p>（届け先情報)</p>
+			<p><%= @order.postal_code %>  <%= @order.address %><br/><%= @order.name %></p>
 		</div>
 
 		<div class="row">
-			<%= link_to "購入を確定する", thanks_path, class:"btn btn-success btn-sm" %>
+			<%= link_to "購入を確定する", orders_path(@order), method: :post, class:"btn btn-success btn-sm" %>
 		</div><br />
 	</div>
 </div>
