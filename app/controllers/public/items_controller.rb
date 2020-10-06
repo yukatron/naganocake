@@ -1,9 +1,7 @@
 class Public::ItemsController < ApplicationController
   def top
-    @genres = Genre.all
-    if
-    @activeitems = @genres.items.where(is_active: true)
-    @items = @activeitems.items.where(favorite: true).page(params[:page]).per(4)
+    @genres = Genre.where(is_active: true)
+    @items = Item.where(favorite: true).page(params[:page]).per(4)
   end
 
   def about
@@ -16,7 +14,7 @@ class Public::ItemsController < ApplicationController
       @items = @genre.items.where(is_active: true).page(params[:page]).per(8)
     else
       @genres = Genre.where(is_active: true)
-      @items = @genres.items.where(is_active: true).page(params[:page]).per(8)
+      @items = Item.where(is_active: true).page(params[:page]).per(8)
     end
   end
 
