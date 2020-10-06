@@ -51,7 +51,6 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    binding.pry
     if @order.save
       item = []
         @items = current_customer.cart_items

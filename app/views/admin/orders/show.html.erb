@@ -57,7 +57,7 @@
 						<td><%= order_detail.quantity %></td>
 						<td><%= sototal(order_detail.price, order_detail.quantity) %></td>
 						<%= form_for(order_detail, url: admin_order_detail_path(order_detail.id), method: :patch) do |f| %>
-						<td><%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [k]} %></td>
+						<td><%= f.select :making_status, OrderDetail.making_statuses.keys.map {|l| [l]} %></td>
 						<td><%= f.submit "更新", class:"btn btn-primary btn-sm" %></td>
 						<% end %>
 					</tr>

@@ -4,14 +4,14 @@ class Public::CartItemsController < ApplicationController
 
   def create
     if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
-      cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
-      cart_item.quantity += params[:cart_item][:quantity].to_i
-      cart_item.save
-      redirect_to items_path
+      @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+      @cart_item.quantity += params[:cart_item][:quantity].to_i
+      @cart_item.save
+      redirect_to cart_items_path
     else
       @cart_item = current_customer.cart_items.build(cart_item_params)
       if @cart_item.save
-        redirect_to items_path
+        redirect_to cart_items_path
       else
         @genres = Genre.all
         @item = Item.find(params[:id])
