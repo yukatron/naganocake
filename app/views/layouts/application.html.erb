@@ -27,10 +27,19 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <%= link_to root_path do %><p class="navbar-brand"><strong>LOGO</strong></p><% end %>
+                <% if admin_signed_in? %>
+                  <%= link_to admin_top_path do %>
+                    <p class="navbar-brand"><strong>LOGO</strong></p>
+                  <% end %>
+                <% else %>
+                  <%= link_to root_path do %>
+                    <p class="navbar-brand"><strong>LOGO</strong></p>
+                  <% end %>
+                <% end %>
               </div>
               <div class="collapse navbar-collapse" id="navbarheader">
                 <ul class="nav navbar-nav">
+                  <!-- 会員 -->
                   <% if customer_signed_in? %>
                     <li><%= link_to "マイページ", customer_path(current_customer.id) %></li>
                     <li><%= link_to "商品一覧", items_path %></li>
@@ -39,11 +48,15 @@
                     </li>
                     <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
                     <p class="navbar-text navbar-right"><%= welcome(current_customer.first_name) %></p>
+                  <!-- 管理人 -->
                   <% elsif admin_signed_in? %>
                     <li><%= link_to "商品一覧", admin_items_path %></li>
+                    <li><%= link_to "会員一覧", admin_customers_path %></li>
+                    <li><%= link_to "注文履歴一覧", admin_orders_path %></li>
                     <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
                     <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
                     <p class="navbar-text navbar-right"> ようこそ、管理人さん！ </p>
+                  <!-- ゲスト -->
                   <% else %>
                     <li><%= link_to "About", about_path %></li>
                     <li><%= link_to "商品一覧", items_path %></li>

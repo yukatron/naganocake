@@ -1,4 +1,5 @@
 class Public::AddressesController < ApplicationController
+  before_action :ensure_current_customer
   def index
   	@add = Address.new
   	@adds = current_customer.addresses

@@ -8,6 +8,10 @@ class Order < ApplicationRecord
 	validates :postal_code, presence: true, format: {with: /\A\d{7}\z/}
 	validates :address,presence: true
 	validates :name, presence: true
+	validates :shipping_cost, presence: true
+	validates :total_payment, presence: true
+	validates :payment_method, presence: true
+	validates :status, presence: true
 
 	enum payment_method: {
 		クレジットカード: 0,
