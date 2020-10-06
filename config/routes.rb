@@ -20,9 +20,9 @@ Rails.application.routes.draw do
 				delete 'destroy_all'
 			end
 		end
+		get 'orders/thanks' => 'orders#thanks', as: 'thanks'
 		resources :orders, only: [:new, :index, :show, :create]
 			post 'orders/confirm' => 'orders#confirm', as: 'order_confirm'
-			get 'orders/thanks' => 'orders#thanks', as: 'thanks'
 	end
 
 	devise_for :admin, skip: :all

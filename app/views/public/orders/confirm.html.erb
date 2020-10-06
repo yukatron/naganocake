@@ -34,11 +34,15 @@
 				</table>
 			</div>
 			<div class="col-xs-4">
+				<%= form_for(@order, url: orders_path(@order), method: :post) do |f| %>
+				<%= f.hidden_field :customer_id, :value => current_customer.id %>
 				<table class="table table-bordered">
 					<tbody>
 						<tr style>
 							<td class="active">送料</td>
-							<td>800</td>
+							<td><%= f.hidden_field :shipping_cost, :value => 800 %>
+								800
+							</td>
 						</tr>
 						<tr style>
 							<td class="active">商品合計</td>
@@ -46,7 +50,10 @@
 						</tr>
 						<tr style>
 							<td class="active">請求金額</td>
-							<td><%= (@total + 800).to_s(:delimited, delimiter: ',') %></td>
+							<td><%= (@total + 800).to_s(:delimited, delimiter: ',') %>
+								<%= f.hidden_field :total_payment, :value => @total+800 %>
+								<%= f.hidden_field :status, :value => :入金待ち %>
+								</td>
 						</tr>
 					</tbody>
 				</table>
@@ -55,17 +62,23 @@
 
 		<div class="row">
 			<label><span class="glyphicon glyphicon-stop"></span>支払い方法</label>
-			<p><%= @order.payment_method %></p>
+			<p><%= @order.payment_method %>
+				<%= f.hidden_field :payment_method, :value => @order.payment_method %>
+			</p>
 		</div>
 
 		<div class="row">
 			<label><span class="glyphicon glyphicon-stop"></span>お届け先</label>
 			<p><%= @order.postal_code %>  <%= @order.address %><br/><%= @order.name %></p>
+			<%= f.hidden_field :postal_code, :value => @order.postal_code %>
+			<%= f.hidden_field :address, :value => @order.address %>
+			<%= f.hidden_field :name, :value => @order.name %>
 		</div>
 
-		<div class="row">
-			<%= link_to "購入を確定する", orders_path(@order), method: :post, class:"btn btn-success btn-sm" %>
+		<div class="actions">
+			<%= f.submit "購入を確定する", class:"btn btn-success btn-sm" %>
 		</div><br />
+		<% end %>
 	</div>
 </div>
 

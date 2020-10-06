@@ -9,19 +9,19 @@ class Public::OrdersController < ApplicationController
     else
       @order = Order.new
       @ads = current_customer.addresses
-      @address = Address.new
+      @address = Address.new(customer_id: current_customer.id)
     end
   end
 
   def confirm
-    @order = Order.new(order_params)
+    @order = Order.new(order_confirm_params)
     @order.customer_id = current_customer.id
     @ads = current_customer.addresses
 
       if params[:_add] == "customersAdd"
         @order.address = current_customer.address
         @order.postal_code = current_customer.postal_code
-        @addname = current_customer.last_name + current_customer.last_name
+        @addname = current_customer.last_name + current_customer.first_name
         @order.name = @addname
       elsif params[:_add] == "shipAdds"
         @ad = @ads.find(params[:Address][:id])
@@ -51,7 +51,7 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
+    binding.pry
     if @order.save
       item = []
         @items = current_customer.cart_items
@@ -63,31 +63,33 @@ class Public::OrdersController < ApplicationController
 
       cart_items = current_customer.cart_items
       cart_items.destroy_all
-
       redirect_to thanks_path
     else
+      @ads = current_customer.addresses
+      @address = Address.new(customer_id: current_customer.id)
       render :new
     end
-
-    unless current_customer.nil? || current_customer.id == @order.customer_id
-        flash[:notice] = "アクセス権がありません"
-      redirect_to orders_path(id: current_customer.id)
-    end
-
   end
 
   def thanks
   end
 
   def index
+    @orders = current_customer.orders
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 
   private
+    def order_confirm_params
+      params.require(:order).permit(:customer_id, :postal_code, :address, :name, :payment_method, address:[:postal_code, :address, :name])
+    end
+
     def order_params
-      params.require(:order).permit(:postal_code, :address, :name, :payment_method, address:[:postal_code, :address, :name])
+      params.require(:order).permit(:customer_id, :postal_code, :address, :name, :payment_method, :shipping_cost, :total_payment, :status)
     end
 
   #退会済みユーザーへの対応

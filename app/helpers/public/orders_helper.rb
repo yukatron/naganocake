@@ -10,6 +10,8 @@ module Public::OrdersHelper
   		"#{subtotal.to_s(:delimited, delimiter: ',')}"
   	end
 
-  	def total
+  	def sototal(price, quantity)
+    subtotal = price * quantity
+    "#{subtotal.to_s(:delimited, delimiter: ',')}"
   	end
 end
