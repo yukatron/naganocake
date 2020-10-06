@@ -1,5 +1,6 @@
 class Public::AddressesController < ApplicationController
-  before_action :ensure_current_customer
+  before_action :authenticate!
+  before_action :customer_is_deleted
   def index
   	@add = Address.new
   	@adds = current_customer.addresses

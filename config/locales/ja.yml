@@ -41,6 +41,17 @@ ja:
       separator: "."
       significant: false
       strip_insignificant_zeros: false
+    enum:
+    order:
+      payment_method:
+        credit_card: クレジットカード
+        bank_transfer: 銀行振り込み
+      status:
+        wait: 入金待ち
+        payment_confirm: 入金確認
+        in_production: 製作中
+        prepare_shipping: 発送準備中
+        shipped: 発送済み
   activerecord:
     models:
       genre: ジャンル
@@ -69,17 +80,6 @@ ja:
         name: 宛名
         address: 住所
         postal_code: 郵便番号(ハイフンなし)
-    enum:
-      order:
-        payment_method:
-          credit_card: クレジットカード
-          bank_transfer: 銀行振り込み
-        status:
-          wait: 入金待ち
-          payment_confirm: 入金確認
-          in_production: 製作中
-          prepare_shipping: 発送準備中
-          shipped: 発送済み
     views:
       pagination:
         first: "<<"

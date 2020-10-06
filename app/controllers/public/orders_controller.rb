@@ -51,7 +51,6 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    binding.pry
     if @order.save
       item = []
         @items = current_customer.cart_items
@@ -90,20 +89,5 @@ class Public::OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(:customer_id, :postal_code, :address, :name, :payment_method, :shipping_cost, :total_payment, :status)
-    end
-
-  #退会済みユーザーへの対応
-    def customer_is_deleted
-      if customer_signed_in? && current_customer.is_deleted?
-         redirect_to root_path
-      end
-    end
-
-  #adminでなければcustomerの中で振り分ける
-    def authenticate!
-      if admin_signed_in?
-      else
-        authenticate_customer!
-     end
     end
 end
