@@ -1,4 +1,6 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate!
+  before_action :customer_is_deleted
 
   def create
     if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?

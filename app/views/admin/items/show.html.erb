@@ -31,7 +31,7 @@
 		            	<div class="row" style="height:3em;">
 			                <label for="price" class="col-xs-4 control-label" >税込価格 (税抜価格)</label>
 			                <div class="col-xs-7">
-			                	<%= tax_added_currency(@item.price, 1.1) %>
+			                	<%= tax_added_currency(@item.price, 1.1) %> (<%=@item.price %>) 円
 			                </div>
 		            	</div>
 		            	<div class="row" style="height:3em;">
