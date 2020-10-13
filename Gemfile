@@ -73,3 +73,8 @@ gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'enum_help'
 gem 'activerecord-import'
+gem "jquery-rails"
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
